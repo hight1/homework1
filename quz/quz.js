@@ -9,6 +9,16 @@
  */
 function dcate(A, B) {
 	/** Fill in here **/
+	function getListLast (list) {
+		if (!list.tail) {
+		  return list
+		} else {
+		  return getListLast(list.tail)
+		}
+	  }
+	  let lastA = getListLast(A)
+	  lastA.tail = B
+	  return A
 }
 
 /**
@@ -24,4 +34,19 @@ function dcate(A, B) {
  */
 function sub(L, start, len) {
 	/** Fill in here **/
+	if (!L || (!start && start !== 0) || (!len && len !== 0)) {
+		throw new Error('缺少参数')
+	  }
+		function getListByIndex (list, index, from = 0) {
+		if (from === index) {
+		  return list
+		} else {
+		  from ++
+		  return getListByIndex(list.tail, index, from)
+		}
+	  }
+	  let startList = getListByIndex(L, start)
+	  let endList = getListByIndex(startList, (start + len - 1), start)
+	  endList.tail = null
+	  return startList
 }
